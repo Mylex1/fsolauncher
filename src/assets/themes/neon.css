@@ -1,0 +1,52 @@
+.MainAppContainer.neon {
+}
+
+.neon .Button {
+   background: linear-gradient(
+      45deg,
+      #3bade3 0%,
+      #576fe6 25%,
+      #9844b7 51%,
+      #ff357f 100%
+   );
+   background-size: 150% !important;
+}
+.MainAppContainer.neon ul.AppSidebar li.Logo {
+   background: url(../images/logo_turbo.png) no-repeat;
+}
+.MainAppContainer.neon ul.AppSidebar li.Active,
+.MainAppContainer.neon ul.AppSidebar li:not(.Logo):hover,
+.MainAppContainer.neon a.Active li {
+   color: #725dd2;
+   border-right-color: #d33c97;
+}
+.MainAppContainer.neon ul.AppSidebar li.Logo:after {
+   content: "NEON";
+}
+.MainAppContainer.neon .AppContentContainer .AppContentTop {
+   background: linear-gradient(
+      45deg,
+      #3bade3 0%,
+      #576fe6 25%,
+      #9844b7 51%,
+      #ff357f 100%
+   ) !important;
+}
+.neon .AppContentTop .Button {
+   background: #40a0e3 !important;
+}
+.neon .Modal h1,
+.neon .Downloads .Download h1,
+.neon .Installable .Tag h1,
+.neon .Settings .Form h1,
+.neon .AppContent .Home .BlogPosts li h1 {
+   background: linear-gradient(
+      45deg,
+      #3bade3 0%,
+      #576fe6 25%,
+      #9844b7 51%,
+      #ff357f 100%
+   );
+   -webkit-background-clip: text;
+   -webkit-text-fill-color: transparent;
+}

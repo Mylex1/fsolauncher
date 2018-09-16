@@ -1,0 +1,12 @@
+{
+   "date": "25 June 2018",
+   "description": "Massive launcher rewrite!",
+   "features": [
+      "Updated Electron from 1.7.9 to 2.0.3",
+      "Rewritten in <b>TypeScript</b> and <b>React</b>",
+      "Overall better experience",
+      "More robust <b>Sims Online</b> installer",
+      "This changelog window!",
+      "Other minor changes"
+   ]
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+   <link rel="stylesheet" type="text/css" href="assets/reset.css" />
+   <link rel="stylesheet" type="text/css" href="assets/animate.css" />
+   <link rel="stylesheet" href="assets/App.css" />
+   <link rel="stylesheet" href="assets/themes/open-beta.css" />
+   <link rel="stylesheet" href="assets/themes/neon.css" />
+   <link rel="stylesheet" type="text/css" href="assets/material-icons.css" />
+</head>
+
+<body style="overflow: hidden; background-color: rgba(0,0,0,0); margin: 0">
+   <div id="root"></div>
+   <div class="Preload">
+      <img src="assets/images/wizard/castle.png" />
+      <img src="assets/images/wizard/awards.png" />
+      <img src="assets/images/wizard/fame.png" />
+      <img src="assets/images/wizard/guy.png" />
+      <img src="assets/images/wizard/nightclub.png" />
+      <img src="assets/images/wizard/world.png" />
+      <img src="assets/images/wizard/pizza.png" />
+   </div>
+</body>
+
+<script>window.exports = module.exports</script>
+<script type="text/tsx">
+      import * as React from 'react';
+      import * as ReactDOM from 'react-dom';
+      
+      import { AppContainer } from 'react-hot-loader';
+      import { Provider } from "react-redux";
+      import { store, history } from "./store";
+
+      let render = () => {
+         const App = require("./views/App").default;
+
+         ReactDOM.render(<AppContainer>
+            <Provider store={store}>
+               <App history={history}/>
+            </Provider>
+         </AppContainer>, document.getElementById('root') as HTMLElement);
+      }
+
+      render();
+
+      if(module.hot) {module.hot.accept(render);}
+</script>
+
+
+</html>

@@ -1,0 +1,958 @@
+/** fsolauncher **/
+/** \src\assets\App.css **/
+
+@import url(css/animate.css);
+
+@font-face {
+   font-family: "Munged";
+   src: url("fonts/Munged-Bold.ttf") format("truetype");
+   font-weight: bold;
+   font-style: normal;
+}
+
+@font-face {
+   font-family: "Munged";
+   src: url("fonts/Munged-Regular.ttf") format("truetype");
+   font-weight: 500;
+   font-style: normal;
+}
+
+@font-face {
+   font-family: "Fredoka One";
+   src: url("fonts/FredokaOne-Regular.ttf") format("truetype");
+   font-style: normal;
+}
+
+::-webkit-scrollbar {
+   width: 5px;
+   padding: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+   background: rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb:active {
+   background: rgba(0, 0, 0, 0.5);
+}
+
+::-webkit-scrollbar-track {
+   background: #ddd;
+}
+
+body {
+   box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
+
+body,
+.MainAppContainer {
+   height: 100vh;
+}
+
+.MainAppContainer {
+   display: flex;
+   flex: 1;
+   -webkit-app-region: drag;
+   color: #7f7f7f;
+   background: #fff;
+   background: -moz-linear-gradient(top, #fff 0%, #eee 100%);
+   background: -webkit-linear-gradient(top, #fff 0%, #eee 100%);
+   background: linear-gradient(to bottom, #fff 0%, #eee 100%);
+   filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#fff', endColorstr='#eee', GradientType=0);
+   background-repeat: no-repeat;
+   background-attachment: fixed;
+   font-family: "Munged";
+   -webkit-touch-callout: none;
+   -webkit-user-select: none;
+   -khtml-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+}
+
+.MainAppContainer .AppContentContainer {
+   flex: 1;
+   flex-direction: column;
+   display: flex;
+}
+
+.MainAppContainer ul.AppSidebar {
+   width: 230px;
+   -webkit-box-shadow: 10px 0 60px -2px rgba(0, 0, 0, 0.1);
+   box-shadow: 10px 0 60px -2px rgba(0, 0, 0, 0.1);
+   background: #fff;
+   background: -moz-linear-gradient(top, #fff 0%, #eee 100%);
+   background: -webkit-linear-gradient(top, #fff 0%, #eee 100%);
+   background: linear-gradient(to bottom, #fff 0%, #eee 100%);
+   filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#fff', endColorstr='#eee', GradientType=0);
+   background-repeat: no-repeat;
+   background-attachment: fixed;
+   list-style-type: none;
+   padding: 0;
+   margin: 0;
+   position: relative;
+   z-index: 16;
+}
+
+.MainAppContainer ul.AppSidebar li {
+   padding: 0;
+   margin: 0;
+   height: 45px;
+}
+
+.MainAppContainer ul.AppSidebar div.Bottom {
+   position: absolute;
+   bottom: 0px;
+   left: 0px;
+   width: 100%;
+   border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.MainAppContainer ul.AppSidebar li.Logo {
+   width: 180px;
+   height: 100px;
+   background: url(images/logo.png) no-repeat;
+   padding: 20px;
+   margin: 0 auto;
+   margin-top: 20px;
+   margin-bottom: 40px;
+   text-align: center;
+   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+   padding-top: 70px;
+   font-family: "Fredoka One";
+}
+
+.MainAppContainer ul.AppSidebar li:not(.Logo) {
+   padding: 15px;
+   padding-left: 25px;
+   transition: background 0.4s, color 0.4s, padding-left 0.4s, border 0.1s;
+   -webkit-app-region: no-drag;
+   font-family: "Fredoka One";
+   text-transform: uppercase;
+}
+
+.MainAppContainer ul.AppSidebar li.Active,
+.MainAppContainer ul.AppSidebar li:not(.Logo):hover,
+a.Active li {
+   border-right: 4px solid #4b88e4;
+   background-color: rgba(0, 0, 0, 0.04);
+   color: #4b88e4;
+   cursor: pointer;
+   padding-left: 30px;
+}
+
+.MainAppContainer ul.AppSidebar li.Logo:after {
+   content: "OPEN BETA";
+}
+
+.MainAppContainer .AppContentContainer .AppContent {
+   flex: 1;
+   height: calc(100% - 100px);
+}
+
+.MainAppContainer .AppContentContainer .AppContentTop {
+   align-self: "stretch";
+   font-size: 22px;
+   padding: 40px;
+   color: #fff;
+   background: #4b88e4;
+   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+   height: 100px;
+   font-family: "Fredoka One";
+   z-index: 10;
+   border-bottom-left-radius: 16px;
+   border-bottom-right-radius: 16px;
+   text-transform: uppercase;
+}
+
+.MainAppContainer .AppContentContainer .AppContentTop span {
+   padding-right: 10px;
+   border-right: 1px solid rgba(255, 255, 255, 0.4);
+   margin-right: 10px;
+   letter-spacing: 0.5px;
+}
+
+.MainAppContainer .AppContentContainer .AppContentTop small {
+   font-size: 14px;
+   font-family: "Munged";
+   font-weight: 400;
+   text-transform: none;
+}
+
+.AppOverlay {
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   top: 0;
+   left: 0;
+   background-color: rgba(0, 0, 0, 0.4);
+   z-index: 14;
+}
+
+.Button {
+   padding: 10px;
+   padding-top: 12px;
+   padding-bottom: 12px;
+   font-family: inherit;
+   text-align: center;
+   border: 0;
+   margin: 0;
+   overflow: hidden;
+   color: #fff;
+   background-color: #47ca51;
+   border-radius: 6px;
+   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.08);
+   cursor: pointer;
+   outline: 0;
+   transition: background 0.8s;
+   background-position: center;
+   font-size: 16px !important;
+   font-family: "Fredoka One";
+}
+
+.Button:hover {
+   background: #64c96d radial-gradient(circle, transparent 1%, #64c96d 1%)
+      center/15000%;
+}
+.Button:active {
+   background-color: #94da9a;
+   background-size: 100%;
+   transition: background 0s;
+}
+
+.Button.Blue {
+   background-color: #4b88e4;
+}
+.Button.Blue:hover {
+   background-color: #7aa7eb;
+}
+.Button.Launch {
+   display: block;
+   margin: 5px;
+   font-size: 14px;
+   width: 150px;
+   margin: 0 auto;
+   margin-top: -20px;
+   margin-bottom: 20px;
+   border-radius: 999px;
+}
+
+.AppContent > div,
+.AppContent > div > div {
+   height: 100%;
+}
+
+.AppContent .Home {
+   display: flex;
+   flex: 1;
+}
+
+.AppContent .Home .BlogPosts {
+   flex: 0.5;
+   padding: 20px;
+   overflow-y: scroll;
+}
+
+.AppContent .Home .BlogPosts li {
+   margin-bottom: 20px;
+   overflow: hidden;
+   padding: 20px;
+   padding-bottom: 20px;
+   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.AppContent .Home .BlogPosts li:last-child {
+   border-bottom: 0;
+}
+
+.AppContent .Home .BlogPosts li h1 {
+   font-size: 25px;
+   margin-bottom: 20px;
+   color: #4b88e4;
+   line-height: 30px;
+   text-align: center;
+   font-family: "Fredoka One";
+   transition: color 0.2s;
+}
+
+.AppContent .Home .BlogPosts li .Button {
+   transition: color 0.2s;
+}
+
+/**.AppContent .Home .BlogPosts li:hover h1,**/
+.AppContent .Home .BlogPosts li .Button:hover {
+   color: #7aa7eb !important;
+}
+
+.AppContent .Home .BlogPosts li p {
+   line-height: 22px;
+   text-align: justify;
+   word-wrap: break-word;
+   hyphens: auto;
+   text-indent: 30px;
+}
+
+.AppContent .Home .BlogPosts li div {
+   text-align: center;
+   display: block;
+   color: rgba(0, 0, 0, 0.5);
+   margin-bottom: 20px;
+   font-family: "Fredoka One";
+}
+
+.AppContent .Home .BlogPosts li a {
+   margin-top: 20px;
+   display: block;
+   font-style: normal;
+   text-decoration: none;
+   width: 150px;
+   margin: 0 auto;
+   margin-top: 20px;
+   border-radius: 999px;
+   padding-left: 25px;
+   padding-right: 25px;
+   text-transform: uppercase;
+}
+
+.AppContent .Home .TwitterEmbed {
+   flex: 0.5;
+   background-color: "#fff";
+}
+
+.AppContent .Installer {
+   display: flex;
+   flex: 1;
+   flex-wrap: wrap;
+   overflow-y: auto;
+}
+
+.Installable {
+   height: 273px;
+   flex: 1 0 50%;
+   position: relative;
+   background-position: center center;
+   transition: background-size 0.3s;
+   background-size: cover;
+   border-right: 1px solid #f0f0f0;
+   border-top: 1px solid #f0f0f0;
+   cursor: pointer;
+}
+.Installable:hover {
+   background-size: 90% !important;
+}
+
+.Installable .Tag {
+   color: #fff;
+   background-image: -webkit-linear-gradient(#fafafa, #f4f4f4 40%, #e5e5e5);
+   display: inline-block;
+   position: absolute;
+   bottom: 45px;
+   left: 45px;
+   margin: 0 auto;
+   padding: 20px;
+   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+   color: #595959;
+   width: 300px;
+   border-radius: 8px;
+   transition: box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.Installable .Tag h1 {
+   font-size: 20px;
+   color: #4b88e4;
+   margin-bottom: 10px;
+   transition: color 0.2s;
+   font-family: "Fredoka One";
+}
+
+.Installable .Tag h2 {
+   font-size: 14px;
+   line-height: 22px;
+}
+
+.Installable.FreeSO {
+   background: url(images/installable_fso.png) #fff;
+   background-position: center center;
+   background-size: 80%;
+   background-repeat: no-repeat;
+   animation-delay: 0.2s;
+}
+
+.Installable.TheSimsOnline {
+   background: url(images/installable_tso.png) #fff;
+   background-position: center center;
+   background-size: 80%;
+   background-repeat: no-repeat;
+   animation-delay: 0.4s;
+}
+
+.Installable.SDL {
+   background: url(images/installable_sdl.png) #fff;
+   background-position: center center;
+   background-size: 80%;
+   background-repeat: no-repeat;
+   animation-delay: 0.6s;
+}
+
+.Installable.NET {
+   background: url(images/installable_net.png) #fff;
+   background-position: center center;
+   background-size: 80%;
+   background-repeat: no-repeat;
+   animation-delay: 0.8s;
+}
+
+.Installable.Mono {
+   background: url(images/installable_mono.png) #fff;
+   background-position: center center;
+   background-size: 80%;
+   background-repeat: no-repeat;
+   animation-delay: 0.8s;
+}
+
+.Installable.Remeshes {
+   background: url(images/installable_remeshes.png) #fff;
+   background-position: center center;
+   background-size: 50%;
+   background-repeat: no-repeat;
+   border-top: none;
+}
+
+.Installable.Remeshes:hover {
+   background-size: 55% !important;
+}
+
+.Installable.OpenAL {
+   background: url(images/installable_oal.png) #fff;
+   background-position: center center;
+   background-size: 80%;
+   background-repeat: no-repeat;
+   animation-delay: 0.6s;
+}
+
+.Installable.Block {
+   flex: 0 0 100%;
+}
+
+.Downloads {
+   overflow-y: auto;
+}
+
+.Downloads .Download {
+   padding: 30px;
+   padding-left: 40px;
+   padding-right: 40px;
+   font-size: 14px;
+   border-bottom: 1px solid #f0f0f0;
+   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+   background-color: #fff;
+   display: block;
+   overflow: hidden;
+}
+
+.Installable:hover .Tag h1,
+.Downloads .Download:hover h1 {
+   color: #7aa7eb !important;
+}
+
+.Downloads .Download h1 {
+   margin-bottom: 10px;
+   font-size: 17px;
+   font-family: "Fredoka One";
+   color: #4b88e4;
+   transition: color 0.2s;
+   text-transform: uppercase;
+   letter-spacing: 0.5px;
+}
+
+.Downloads .Download p {
+   color: rgba(0, 0, 0, 0.5);
+   display: block;
+   margin-bottom: 30px;
+}
+
+@-webkit-keyframes animate-stripes {
+   100% {
+      background-position: -100px 0px;
+   }
+}
+
+@keyframes animate-stripes {
+   100% {
+      background-position: 100px 0px;
+   }
+}
+
+.ProgressBar {
+   transition: width 1s ease-in-out;
+   float: left;
+   width: 0%;
+   height: 5px;
+   overflow: hidden;
+   background-image: -webkit-linear-gradient(
+         -45deg,
+         transparent 33%,
+         rgba(255, 255, 255, 0.3) 33%,
+         rgba(255, 255, 255, 0.3) 66%,
+         transparent 66%
+      ),
+      -webkit-linear-gradient(top, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)),
+      -webkit-linear-gradient(left, #4b88e4, #4b88e4);
+   border-radius: 999px;
+   background-size: 35px 20px, 100% 100%, 100% 100%;
+   -webkit-animation: animate-stripes 5s linear infinite;
+   animation: animate-stripes 5s linear infinite;
+}
+
+.ProgressBar.Stopped {
+   animation: none;
+   -webkit-animation: none;
+   background-image: none;
+   background: #4b88e4;
+}
+
+.Downloads .Download .Button {
+   border-radius: 999px;
+   background: transparent;
+   color: rgba(0, 0, 0, 0.4);
+   box-shadow: none;
+   transition: color 0.2s;
+}
+
+.Downloads .Download .Button:hover {
+   color: rgba(0, 0, 0, 0.2);
+}
+
+.Modal {
+   width: 400px;
+   background-image: -webkit-linear-gradient(#fafafa, #f4f4f4 40%, #e5e5e5);
+   background-position: 97% center;
+   background-repeat: no-repeat;
+   box-shadow: 0 19px 38px rgba(0, 0, 0, 0.1), 0 15px 12px rgba(0, 0, 0, 0.22);
+   border-radius: 12px;
+   z-index: 16;
+   position: fixed;
+   top: 50%;
+   left: 50%;
+   padding: 20px;
+   padding-top: 30px;
+   height: 250px;
+   margin-top: -125px;
+   margin-left: -200px;
+}
+
+.WelcomeScreen {
+   width: 500px;
+   height: 450px;
+   margin-top: -225px;
+   margin-left: -250px;
+   background-image: -webkit-linear-gradient(#fafafa, #f4f4f4 40%, #e5e5e5);
+   background-position: 97% center;
+   background-repeat: no-repeat;
+   box-shadow: 0 19px 38px rgba(0, 0, 0, 0.1), 0 15px 12px rgba(0, 0, 0, 0.22);
+   z-index: 16;
+   position: fixed;
+   top: 50%;
+   left: 50%;
+   padding: 20px;
+   border-radius: 16px;
+   text-align: "center";
+}
+
+.WelcomeScreen > div > div img {
+   width: 75px;
+   height: auto;
+   margin-bottom: 20px;
+   float: left;
+   vertical-align: middle;
+}
+
+.WelcomeScreen > div > div {
+   overflow: hidden;
+   display: block;
+}
+
+.WelcomeScreen > div > div > span {
+   float: left;
+   padding-top: 6px;
+   margin-left: 8px;
+   font-family: "Fredoka One";
+   color: rgba(0, 0, 0, 0.7);
+}
+
+.WelcomeScreen > div {
+   float: left;
+   padding: 20px;
+}
+
+.WelcomeScreen > div h1 {
+   color: rgba(0, 0, 0, 0.7);
+   font-family: "Fredoka One";
+   font-size: 24px;
+   margin-bottom: 10px;
+}
+.WelcomeScreen > div > span {
+   display: block;
+   color: rgba(0, 0, 0, 0.3);
+   margin-bottom: 20px;
+   font-size: 14px;
+}
+
+.WelcomeScreen ul {
+   padding: 20px;
+}
+
+.WelcomeScreen ul li {
+   margin-bottom: 5px;
+}
+
+.Modal h1 {
+   font-size: 24px;
+   color: #4b88e4;
+   margin-bottom: 20px;
+   font-family: "Fredoka One";
+}
+
+.Modal p {
+   line-height: 21px;
+   font-size: 16px;
+}
+
+.Modal .Bottom {
+   position: absolute;
+   bottom: 50px;
+   right: 30px;
+   font-size: 16px;
+}
+
+.Modal .Bottom .Button {
+   padding-right: 20px;
+   padding-left: 20px;
+   margin-right: 15px;
+   text-transform: uppercase;
+   font-size: 16px !important;
+}
+
+.Modal .Bottom .Button.Transparent {
+   background: transparent;
+   color: rgba(0, 0, 0, 0.4);
+   box-shadow: none;
+   padding-left: 0px;
+   padding-right: 10px;
+}
+
+.Settings .Form {
+   padding: 30px;
+   width: 50%;
+   margin-bottom: -30px;
+   float: left;
+}
+
+.Settings .Form h1 {
+   padding: 10px;
+   color: #4b88e4;
+   letter-spacing: 1px;
+   text-transform: uppercase;
+   margin-bottom: 20px;
+   padding-left: 0;
+   font-size: 16px;
+   border-bottom: 1px solid #f0f0f0;
+   font-family: "Fredoka One";
+}
+
+.Settings .Form > div {
+   margin-bottom: 20px;
+}
+
+.Settings .Form > div span {
+   margin-bottom: 10px;
+   display: block;
+   font-size: 16px;
+   color: #898989;
+}
+
+.Settings .Form > div small {
+   display: block;
+   line-height: 20px;
+   font-size: 12px;
+   margin-top: 10px;
+   color: rgba(0, 0, 0, 0.4);
+}
+
+input.Error,
+select.Error {
+   border: 2px solid #c93507;
+   color: #c93507;
+}
+
+input,
+select {
+   animation-name: appear;
+   animation-duration: 500ms;
+   animation-timing-function: ease-out;
+   animation-fill-mode: both;
+   font-family: inherit;
+   font-size: inherit;
+   color: inherit;
+   border: 0;
+   border-radius: 8px;
+   background-image: -webkit-linear-gradient(#fafafa, #f4f4f4 40%, #e5e5e5);
+   background-position: 97% center;
+   background-repeat: no-repeat;
+   border: 1px solid #aaa;
+   width: 100%;
+   font-family: Munged;
+   padding: 10px;
+   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+   outline: 0;
+}
+
+select {
+   -webkit-appearance: button;
+   background-image: url(images/caret.png),
+      -webkit-linear-gradient(#fafafa, #f4f4f4 40%, #e5e5e5);
+}
+
+@keyframes spin {
+   0% {
+      -webkit-transform: rotate(0deg);
+   }
+   100% {
+      -webkit-transform: rotate(360deg);
+   }
+}
+
+.Spinner {
+   animation: spin 2s infinite linear;
+}
+
+.About {
+   padding: 20px;
+   overflow-y: scroll;
+}
+
+.About > div {
+   display: block;
+   margin-bottom: 20px;
+}
+
+.About > div h1 {
+   font-family: "Fredoka One";
+   display: block;
+   margin-bottom: 10px;
+}
+
+.About .Button {
+   margin-bottom: 10px;
+   display: inline-block;
+   overflow: hidden;
+   padding: 10px;
+}
+
+.About > div p {
+   max-width: 600px;
+   display: block;
+   padding: 20px;
+   padding-top: 10px;
+   line-height: 22px;
+   font-size: 14px;
+}
+
+.Button:active {
+}
+
+.Toast {
+   padding: 12px;
+   color: #fff;
+   padding-left: 15px;
+   padding-right: 15px;
+   border-radius: 999px;
+   background-color: #404040;
+   font-family: "Fredoka One";
+   margin-top: 10px;
+   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.Toasts {
+   position: fixed;
+   bottom: 20px;
+   right: 20px;
+   z-index: 12;
+}
+
+.Notification {
+   padding: 30px;
+   padding-top: 40px;
+   font-size: 14px;
+   background: #ffffff;
+   display: block;
+   border-bottom: 1px solid #f0f0f0;
+   overflow: hidden;
+}
+
+.Notification h1 {
+   font-family: "Fredoka One";
+   text-transform: uppercase;
+   margin-bottom: 10px;
+   font-size: 16px;
+}
+
+b {
+   color: #4b88e4;
+}
+
+.Notification > i {
+   float: left;
+   margin-right: -130px;
+   height: 100px;
+   margin-top: -5px;
+}
+
+.Notification p {
+   color: rgba(0, 0, 0, 0.5);
+   display: block;
+   font-family: "Munged";
+   text-decoration: none !important;
+   padding-left: 0;
+   line-height: 22px;
+   text-align: justify;
+}
+
+.Notification .Button {
+   float: right;
+   font-size: 14px !important;
+   padding: 10px;
+}
+
+.Notification .Button i {
+   font-size: 16px !important;
+}
+
+.Installer {
+   position: relative;
+}
+
+.Installer.GlobalProgressBackdrop {
+   background: url(images/city.png) no-repeat;
+   background-position: left center;
+   background-size: cover;
+   z-index: 1;
+   margin-top: -20px;
+   height: calc(100% + 20px);
+   /*transition: background-image 0.2s ease-in-out;*/
+}
+
+.Installer.GlobalProgressBackdrop .Tip {
+}
+
+.Installer.GlobalProgressBackdrop .Tip {
+   background: rgba(0, 0, 0, 0.8);
+   color: #fff;
+   padding: 15px;
+   width: 250px;
+   border-radius: 12px;
+   position: absolute;
+   margin-top: 20px;
+}
+
+.Installer.GlobalProgressBackdrop .Tip i {
+   float: left;
+   margin-right: 5px;
+   margin-top: -5px;
+}
+
+.Installer.GlobalProgressBackdrop .Tip h1 {
+   margin-bottom: 5px;
+   display: block;
+   padding-bottom: 5px;
+   font-family: "Fredoka One";
+}
+
+.Installer.GlobalProgressBackdrop .Tip p {
+   font-size: 14px;
+   line-height: 18px;
+}
+
+.Installer.GlobalProgressBackdrop .Bottom {
+   height: 170px;
+   width: 100%;
+   position: absolute;
+   left: 0;
+   bottom: 0;
+   z-index: 10;
+   color: #fff;
+   background-image: linear-gradient(
+      to bottom,
+      transparent,
+      rgba(0, 0, 0, 0.5),
+      #000
+   );
+   padding: 30px;
+}
+
+.Installer.GlobalProgressBackdrop .Bottom h1 {
+   font-size: 24px;
+   font-weight: normal;
+   margin-bottom: 10px;
+   font-family: "Fredoka One";
+}
+
+.Installer.GlobalProgressBackdrop .Bottom p {
+   font-size: 14px;
+   font-weight: 400;
+   margin-bottom: 15px;
+   padding: 0;
+}
+
+.Installable .Check {
+   color: #47ca51;
+   float: left;
+   margin-right: 5px;
+}
+
+.Installable .Check i {
+   font-size: 24px;
+}
+
+.Preload {
+   position: absolute;
+   overflow: hidden;
+   left: -9999px;
+   top: -9999px;
+   height: 1px;
+   width: 1px;
+}
+
+.Notification .Button {
+   border-radius: 999px;
+   padding-left: 15px;
+   padding-right: 15px;
+   background: transparent;
+   box-shadow: none;
+   color: #4b88e4;
+}
+
+/** cleanup **/
+.Installer.NoInternet > div {
+   text-align: center;
+   width: 100%;
+   height: 100%;
+   padding: 20px;
+   padding-top: 30px;
+}
+.Installer.NoInternet > div > i {
+   margin-bottom: 20px;
+   font-size: 30px;
+}
+.AppContentTop .Button {
+   overflow: hidden;
+   border-radius: 999px;
+   padding-left: 15px;
+   padding-right: 15px;
+}
+.Downloads.NoInternet {
+   font-size: 16px;
+   padding: 20px;
+   padding-top: 30px;
+   text-align: center;
+}
